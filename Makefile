@@ -1,7 +1,7 @@
 NAME	= 	minishell
 
-SRC_FOLDER = .
-HEADER_FOLDER = .
+SRC_FOLDER = ./
+HEADER_FOLDER = ./
 LIBFT_FOLDER = ./libft/
 READLINE_FOLDER = $(shell brew --prefix readline)/lib/
 HEADER_READLINE_FOLDER = $(shell brew --prefix readline)

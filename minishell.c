@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: nleyton <nleyton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:34:11 by gjacqual          #+#    #+#             */
-/*   Updated: 2022/02/09 20:34:43 by gjacqual         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:41:28 by nleyton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h" 
+#include "minishell.h"
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -19,12 +19,13 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	   // new line
 	(void)envp;
 	while (1)
 	{
 		str = readline("minishell> ");
 		add_history(str);
-		// printf("\n");
+		printf("MODIFICATION\n"); // new line
 		p = fork();
 		if (p == 0)
 		{

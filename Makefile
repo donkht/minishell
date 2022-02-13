@@ -48,13 +48,11 @@ bonus		: export BONUS_MODE := 1
 
 ${LIBFT_LIB}: FORCE
 			@make -C ./${LIBFT_DIR}
-${MLX_LIB}	:
-			@make -C ./${MLX_DIR}
 
 FORCE:;
 
 ${NAME}	:	${if ${BONUS_MODE}, ${OBJS_B}, ${OBJS}} ${LIBFT_LIB}
-			${CC} ${CFLAGS} ${if ${BONUS_MODE}, ${OBJS_B}, ${OBJS}} ${LIBFT_LIB} -o ${NAME}
+			${CC} ${CFLAGS} ${if ${BONUS_MODE}, ${OBJS_B}, ${OBJS}} -L ${LIBFT_DIR} -lft -o ${NAME}
 			@echo "\033[1;32mMinishell is ready\033[0m"	
 
 ${OBJS_DIR}: 
@@ -65,7 +63,7 @@ ${OBJS_B_DIR}:
 # Include all .d files
 -include ${DEP}
 ${OBJS_DIR}/%.o : %.c ${INC} Makefile | ${OBJS_DIR}  
-			${CC} ${CFLAGS} $(INC_DIR:%=-I %) -c $< -o $@
+			${CC} ${CFLAGS} $(INC_DIR:%=-I %) ${LIBFT_DIR:%=-I %} -c $< -o $@
 
 ${OBJS_B_DIR}/%.o : %.c ${INC_B} Makefile | ${OBJS_B_DIR} 
 			${CC} ${CFLAGS} $(INC_B_DIR:%=-I %) -c $< -o $@

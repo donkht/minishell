@@ -6,10 +6,15 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 15:20:25 by gjacqual          #+#    #+#             */
-/*   Updated: 2022/02/13 15:49:45 by gjacqual         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:56:56 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
+int	main(int argc, char **argv, char **envp)
+{
+
+	return (0);
+}

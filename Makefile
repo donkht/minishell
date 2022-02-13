@@ -66,7 +66,7 @@ ${OBJS_DIR}/%.o : %.c ${INC} Makefile | ${OBJS_DIR}
 			${CC} ${CFLAGS} $(INC_DIR:%=-I %) ${LIBFT_DIR:%=-I %} -c $< -o $@
 
 ${OBJS_B_DIR}/%.o : %.c ${INC_B} Makefile | ${OBJS_B_DIR} 
-			${CC} ${CFLAGS} $(INC_B_DIR:%=-I %) -c $< -o $@
+			${CC} ${CFLAGS} $(INC_B_DIR:%=-I %) ${LIBFT_DIR:%=-I %} -c $< -o $@
 
 #Utils
 clean:

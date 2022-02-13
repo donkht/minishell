@@ -3,7 +3,7 @@ NAME	= 	minishell
 SRC_FOLDER = ./
 HEADER_FOLDER = ./
 LIBFT_FOLDER = ./libft/
-READLINE_FOLDER = $(shell brew --prefix readline)/lib/
+#READLINE_FOLDER = $(shell brew --prefix readline)/lib/
 HEADER_READLINE_FOLDER = $(shell brew --prefix readline)
 
 SRC_LIST = minishell.c
@@ -23,12 +23,13 @@ CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -f 
 
 ALL_LIBS	= \
--L $(READLINE_FOLDER) -lreadline \
+-lreadline \
 -L $(LIBFT_FOLDER) -lft
 ALL_HEADERS = \
 -I $(HEADER_READLINE_FOLDER) \
 -I $(LIBFT_FOLDER) \
 -I $(HEADER_FOLDER)
+# -L $(READLINE_FOLDER)
 
 all:	$(NAME)
 

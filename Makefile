@@ -66,21 +66,19 @@ ${OBJS_B_DIR}:
 -include ${DEP}
 ${OBJS_DIR}/%.o : %.c ${INC} Makefile | ${OBJS_DIR}  
 			${CC} ${CFLAGS} $(INC_DIR:%=-I %) -c $< -o $@
-			@echo "The object file is ready in OBJS_DIR"
 
 ${OBJS_B_DIR}/%.o : %.c ${INC_B} Makefile | ${OBJS_B_DIR} 
 			${CC} ${CFLAGS} $(INC_B_DIR:%=-I %) -c $< -o $@
-			@echo "The object BONUS file is ready in OBJS_B_DIR"
 
 #Utils
 clean:
 			${MAKE} -C ${LIBFT_DIR} clean
 			@rm -rf ${OBJS_DIR} ${OBJS_B_DIR}
-			@echo "Minishell is Cleaned"	
+			@echo "\033[1;96mMinishell is Cleaned\033[0m"	
 
 fclean: clean
 			@${RM} ${NAME} ${LIBFT_LIB}
-			@echo "Minishell is Full Cleaned"	
+			@echo "\033[1;96mMinishell and Libft are Full Cleaned\033[0m"	
 
 re			:	fclean all
 

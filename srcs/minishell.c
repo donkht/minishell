@@ -6,7 +6,7 @@
 /*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/13 15:20:25 by gjacqual          #+#    #+#             */
-/*   Updated: 2022/02/13 15:56:56 by gjacqual         ###   ########.fr       */
+/*   Updated: 2022/02/13 15:57:52 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	return (0);
 }

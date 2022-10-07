@@ -3,62 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:25:58 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:25:59 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/12 15:35:16 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:21:41 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	my_counter(int n)
+static	int	ft_size_intstr(int n)
 {
-	int	count;
-	int	minus;
+	size_t	i;
+	int		sign;
 
-	minus = 0;
-	count = 0;
-	if (n == 0)
-		return (1);
+	if (n <= 0)
+		sign = 1;
+	else
+		sign = 0;
+	i = sign;
+	while (n != 0)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
+static char	*ft_strbuild(int n, char	*numstr, size_t	sizestr)
+{
+	numstr[sizestr] = '\0';
 	if (n < 0)
 	{
+		numstr[0] = '-';
 		n = -n;
-		minus = 1;
 	}
-	while (n > 0)
-	{
-		n = n / 10;
-		count++;
+	else if (n == 0)
+		numstr[0] = '0';
+	while (n != 0)
+	{	
+		numstr[--sizestr] = (n % 10) + '0';
+		n /= 10;
 	}
-	return (count + minus);
+	return (numstr);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*ret;
-	int		len;
-	int		sign;
+	char	*numstr;
+	size_t	sizestr;
 
 	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	sign = 0;
-	len = my_counter(n);
-	ret = malloc(len + 1);
-	if (!ret)
-		return (NULL);
-	ret[len] = '\0';
-	if (n < 0)
 	{
-		sign = 1;
-		n = -n;
+		numstr = ft_strdup("-2147483648");
+		return (numstr);
 	}
-	while (len-- > sign)
+	sizestr = ft_size_intstr(n);
+	numstr = (char *)ft_calloc((sizestr + 1), 1);
+	if (numstr)
 	{
-		ret[len] = (n % 10) + '0';
-		n = n / 10;
+		numstr = ft_strbuild(n, numstr, sizestr);
+		return (numstr);
 	}
-	if (sign)
-		ret[0] = '-';
-	return (ret);
+	return (NULL);
 }

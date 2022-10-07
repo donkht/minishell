@@ -3,88 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:26:29 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/30 04:33:20 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/12 15:34:14 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/01/22 04:52:23 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static int	ft_str_counter(char const *s, char c)
 {
-	int	count;
+	size_t	i;
+	size_t	count;
+	size_t	nextstr;
 
+	i = 0;
 	count = 0;
-	while (*s != 0)
+	nextstr = 0;
+	while (s[i] != '\0')
 	{
-		if (*s != c && (*(s + 1) == c || *(s + 1) == 0))
+		if (s[i] == c && nextstr == 1)
+			nextstr = 0;
+		if (s[i] != c && nextstr == 0)
+		{
+			nextstr = 1;
 			count++;
-		s++;
+		}	
+		i++;
 	}
 	return (count);
 }
 
-static char	*new_word_alloc(char const *s, char c)
-{
-	char	*ret;
-	int		letters;
-	char	*tmp;
-
-	tmp = (char *)s;
-	letters = 0;
-	while (*tmp != c && *tmp != 0)
-	{
-		tmp++;
-		letters++;
-	}
-	ret = malloc(letters + 1);
-	if (!ret)
-		return (NULL);
-	ret[letters] = '\0';
-	while (letters > 0)
-	{
-		letters--;
-		ret[letters] = s[letters];
-	}
-	return (ret);
-}
-
-static void	free_navalny(char **ret, int i)
-{
-	while (--i > 0)
-	{
-		free(ret[i]);
-		i++;
-	}
-	free(ret);
-}
-
 char	**ft_split(char const *s, char c)
 {
-	int		words;
-	char	**ret;
-	int		i;
+	char	**list;
+	size_t	count;
+	char	*start;
 
 	if (!s)
 		return (NULL);
-	words = count_words(s, c);
-	ret = malloc(sizeof(char *) * words + 1);
-	if (!ret)
+	count = ft_str_counter((char *)s, c);
+	list = (char **)malloc(sizeof(char *) * (count + 1));
+	if (!list)
 		return (NULL);
-	ret[words] = NULL;
-	i = 0;
-	while (i < words)
+	start = (char *)s;
+	while (*s)
 	{
-		while (*s == c)
-			s++;
-		ret[i] = new_word_alloc(s, c);
-		if (!ret[i])
-			free_navalny(ret, i);
-		while (*s != c)
-			s++;
-		i++;
+		if (*s == c)
+		{
+			if (start != s)
+				*(list++) = ft_substr(start, 0, s - start);
+			start = (char *)s + 1;
+		}
+		++s;
 	}
-	return (ret);
+	if (start != s)
+		*(list++) = ft_substr(start, 0, s - start);
+	*list = NULL;
+	return (list - count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:27:59 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:28:00 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/12 15:30:43 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:24:10 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,22 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
-	size_t	i;
+	char	*sstr;
+	size_t	slen;
+	size_t	subsize;
 
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen((char *)s) || len == 0)
-		return (ft_strdup(""));
-	if (ft_strlen((char *)(s + start)) < len)
-		len = ft_strlen((char *)(s + start));
-	str = malloc(len + 1);
-	if (!str)
+	slen = ft_strlen(s);
+	if (slen < start)
+		return (ft_strdup("\0"));
+	subsize = ft_strlen(s + start);
+	if (subsize < len)
+		len = subsize;
+	sstr = (char *)malloc(sizeof(char) * len + 1);
+	if (!sstr)
 		return (NULL);
-	i = -1;
-	while (++i < len)
-		*(str + i) = *(s + start + i);
-	str[i] = 0;
-	return (str);
+	ft_memmove(sstr, (s + start), len);
+	sstr[len] = '\0';
+	return (sstr);
 }

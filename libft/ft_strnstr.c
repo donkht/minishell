@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:27:54 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:27:55 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/12 15:15:46 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:23:59 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	char	c;
+	char	hayc;
+	size_t	nlen;
 
-	if (*needle == '\0')
-		return ((char *)haystack);
-	if (*haystack == 0)
+	hayc = *haystack;
+	c = *needle;
+	nlen = ft_strlen(needle);
+	if (nlen > len)
 		return (NULL);
-	i = 0;
-	while (i < len)
+	if (c == '\0')
+		return ((char *)haystack);
+	while (hayc != '\0' && len-- >= nlen)
 	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && needle[j])
-			j++;
-		if (!needle[j] && i + j <= len)
-			return ((char *)(haystack + i));
-		i++;
+		if ((!ft_strncmp(haystack, needle, nlen)) && (*haystack == c))
+			return ((char *)haystack);
+		haystack++;
 	}
 	return (NULL);
 }

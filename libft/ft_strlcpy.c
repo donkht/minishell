@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:27:47 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:27:48 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/12 14:43:51 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:23:37 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
+	size_t	srcsize;
 
-	if (!src)
+	if (!dst || !src)
 		return (0);
-	i = 0;
-	if (dstsize < 1)
-		return (ft_strlen((char *)src));
-	while (i < dstsize - 1)
+	srcsize = ft_strlen(src);
+	if (srcsize + 1 < dstsize)
 	{
-		dst[i] = src[i];
-		if (src[i] == 0)
-			return (ft_strlen((char *)src));
-		i++;
+		ft_memcpy(dst, src, srcsize + 1);
 	}
-	dst[i] = 0;
-	return (ft_strlen((char *)src));
+	else if (dstsize != 0)
+	{
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = '\0';
+	}
+	return (srcsize);
 }

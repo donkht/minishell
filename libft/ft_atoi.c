@@ -3,40 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:25:18 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:28:23 by nleyton          ###   ########.fr       */
+/*   Created: 2022/02/08 21:20:55 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:21:03 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static long	long_max_detect(unsigned long number, int sign)
+{
+	if (number > LONG_MAX)
+	{
+		if (sign == -1)
+			number = 0;
+		else
+			number = LONG_MAX;
+	}	
+	return (number);
+}
+
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	ret;
-	int	sign;
+	unsigned long	number;
+	int				sign;
+	int				i;
 
 	i = 0;
-	ret = 0;
+	number = 0;
 	sign = 1;
-	while (str[i] == ' ' || (str[i] > 8 && str[i] < 14))
+	while (str[i] == '\n' || str[i] == '\t' || str[i] == '\r'
+		|| str[i] == '\v' || str[i] == '\f'
+		|| str[i] == ' ' )
 		i++;
+	if (str[i] == '-')
+		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit((int)str[i]))
 	{
-		if (str[i] == '-')
-			sign = -1;
+		number = (number * 10) + (str[i] - 48);
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if ((sign == 1 && ret == 214748364 && str[i] > '7') || ret > 214748364)
-			return (-1);
-		else if (ret == 214748364 && sign == -1 && str[i] == '9')
-			return (-1);
-		ret = ret * 10 + str[i] - 48;
-		i++;
-	}
-	return (ret * sign);
+	number = long_max_detect(number, sign);
+	return (number * sign);
 }

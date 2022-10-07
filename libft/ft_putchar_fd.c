@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nleyton <nleyton@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: gjacqual <gjacqual@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/29 22:26:17 by nleyton           #+#    #+#             */
-/*   Updated: 2022/01/29 22:26:18 by nleyton          ###   ########.fr       */
+/*   Created: 2021/05/08 21:05:26 by gjacqual          #+#    #+#             */
+/*   Updated: 2022/02/08 21:23:04 by gjacqual         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

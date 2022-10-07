@@ -1,1 +1,0 @@
-# S42-minishell
